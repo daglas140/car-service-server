@@ -6,6 +6,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.SchemaOutputResolver;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class JwtUtils {
 
     public String createToken(Map<String, Object> claims, String username) {
         return Jwts.builder().setClaims(claims)
-                .setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
+                .setSubject(username).setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }

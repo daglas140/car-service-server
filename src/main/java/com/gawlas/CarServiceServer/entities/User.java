@@ -9,11 +9,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(name = "type")
+    private String type;
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
     private String email;
+    @Column(name = "pers_Id")
     private String persId;
     private Date createdDate;
+
+    public User() {
+    }
 
     public Integer getId() {
         return id;
@@ -21,6 +30,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUserName() {
