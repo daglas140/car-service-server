@@ -8,17 +8,19 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "auth_id")
+    private Integer authId;
     @Column(name = "type")
     private String type;
     @Column(name = "user_name")
     private String userName;
-    @Column(name = "password")
-    private String password;
     @Column(name = "email")
     private String email;
     @Column(name = "pers_Id")
     private String persId;
+    @Column(name = "created_date")
     private Date createdDate;
 
     public User() {
@@ -30,6 +32,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(Integer authId) {
+        this.authId = authId;
     }
 
     public String getType() {
@@ -46,14 +56,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
