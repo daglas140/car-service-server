@@ -3,16 +3,27 @@ package com.gawlas.CarServiceServer.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Cars")
+@Table(name = "cars")
 public class Cars {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(name = "brand")
     private String brand;
+    @Column(name = "model")
     private String model;
+    @Column(name = "prod_year")
     private Integer productionYear;
+    @Column(name = "mileage")
     private Integer mileage;
+    @Column(name = "vin")
     private String vinNumber;
+    @Column(name = "engine_no")
+    private String engineNumber;
+    @Column(name = "engine_type")
+    private String engineType;
+    @Column(name = "engine_capacity")
+    private String engineCapacity;
 
     public Integer getId() {
         return id;
@@ -60,5 +71,29 @@ public class Cars {
 
     public void setVinNumber(String vinNumber) {
         this.vinNumber = vinNumber;
+    }
+
+    public String getEngineNumber() {
+        return engineNumber;
+    }
+
+    public void setEngineNumber(String engineNumber) {
+        this.engineNumber = engineNumber;
+    }
+
+    public String getEngineType() {
+        return engineType;
+    }
+
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
+    }
+
+    public String getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(String engineCapacity) {
+        this.engineCapacity = engineCapacity;
     }
 }

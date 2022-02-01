@@ -3,7 +3,7 @@ package com.gawlas.CarServiceServer.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

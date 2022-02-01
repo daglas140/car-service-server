@@ -1,19 +1,26 @@
 package com.gawlas.CarServiceServer.entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "auth_pass")
 public class AuthPass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "user_id")
-    private Integer userId;
     @Column(name = "password")
-    private Integer password;
+    private String password;
+
+    @OneToOne(mappedBy = "authPass")
+    private User user;
+
+    public AuthPass() {
+    }
+
+    public AuthPass(String password) {
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -23,19 +30,19 @@ public class AuthPass {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

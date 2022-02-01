@@ -4,24 +4,28 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "auth_id")
-    private Integer authId;
     @Column(name = "type")
     private String type;
     @Column(name = "user_name")
     private String userName;
     @Column(name = "email")
     private String email;
-    @Column(name = "pers_Id")
-    private String persId;
     @Column(name = "created_date")
     private Date createdDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pers_Id", referencedColumnName = "id")
+    private PersonalInfo personalInfo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "auth_id", referencedColumnName = "id")
+    private AuthPass authPass;
 
     public User() {
     }
@@ -32,14 +36,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAuthId() {
-        return authId;
-    }
-
-    public void setAuthId(Integer authId) {
-        this.authId = authId;
     }
 
     public String getType() {
@@ -66,19 +62,27 @@ public class User {
         this.email = email;
     }
 
-    public String getPersId() {
-        return persId;
-    }
-
-    public void setPersId(String persId) {
-        this.persId = persId;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public AuthPass getAuthPass() {
+        return authPass;
+    }
+
+    public void setAuthPass(AuthPass authPass) {
+        this.authPass = authPass;
+    }
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
     }
 }

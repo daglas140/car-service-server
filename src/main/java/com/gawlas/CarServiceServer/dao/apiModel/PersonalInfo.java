@@ -1,32 +1,12 @@
-package com.gawlas.CarServiceServer.entities;
+package com.gawlas.CarServiceServer.dao.apiModel;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "pd_info")
 public class PersonalInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "sure_name")
     private String sureName;
-    @Column(name = "adres")
     private String adres;
-    @Column(name = "tel")
     private String tel;
 
-    @OneToOne(mappedBy = "personalInfo")
-    private User user;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public PersonalInfo() {
     }
 
     public String getName() {
@@ -59,13 +39,5 @@ public class PersonalInfo {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

@@ -1,6 +1,7 @@
 package com.gawlas.CarServiceServer.services;
 
 import com.gawlas.CarServiceServer.common.constants.AccountTypes;
+import com.gawlas.CarServiceServer.entities.AuthPass;
 import com.gawlas.CarServiceServer.entities.User;
 import com.gawlas.CarServiceServer.repository.UserRepository;
 import org.modelmapper.ValidationException;
@@ -27,7 +28,7 @@ public class UserServices implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getAuthPass().getPassword(), new ArrayList<>());
     }
 
     /**
@@ -71,12 +72,13 @@ public class UserServices implements UserDetailsService {
      */
     public User addNewUser(String userName, String password, String email, AccountTypes type) {
         User user = new User();
-        user.setPassword(passwordEncoder.encode(password));
+        user.setAuthPass(new AuthPass(passwordEncoder.encode(password)));
         user.setUserName(userName);
         user.setEmail(email);
         user.setType(type.name());
         user.setCreatedDate(new Date());
         userRepository.save(user);
+
         return userRepository.findByUserName(userName);
     }
 
@@ -86,10 +88,10 @@ public class UserServices implements UserDetailsService {
      * @param oldPassword
      * @param newPassword
      */
-    public void changePassword(String userName, String oldPassword, String newPassword) throws Exception {
+    public void changePassword(String userName, String oldPassword, String newPassword) throws ValidationException {
         User user = userRepository.findByUserName(userName);
-        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(newPassword));
+        if (passwordEncoder.matches(oldPassword, user.getAuthPass().getPassword())) {
+            user.getAuthPass().setPassword(passwordEncoder.encode(newPassword));
             userRepository.save(user);
         } else {
             List<ErrorMessage> errorMessages = new ArrayList<>();

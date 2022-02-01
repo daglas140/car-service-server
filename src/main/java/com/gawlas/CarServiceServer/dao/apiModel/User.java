@@ -7,7 +7,7 @@ public class User {
     private String userName;
     private String password;
     private String email;
-    private String persId;
+    private PersonalInfo personalData;
     private Date createdDate;
 
     public User() {
@@ -18,11 +18,11 @@ public class User {
         this.email = email;
     }
 
-    public User(Integer id, String userName, String email, String persId, Date createdDate) {
+    public User(Integer id, String userName, String password, String email, Date createdDate) {
         this.id = id;
         this.userName = userName;
+        this.password = password;
         this.email = email;
-        this.persId = persId;
         this.createdDate = createdDate;
     }
 
@@ -50,14 +50,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPersId() {
-        return persId;
-    }
-
-    public void setPersId(String persId) {
-        this.persId = persId;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -72,5 +64,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public PersonalInfo getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalInfo personalData) {
+        this.personalData = personalData;
     }
 }
