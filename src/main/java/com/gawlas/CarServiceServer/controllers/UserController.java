@@ -14,20 +14,23 @@ public class UserController {
     private UserServices userServices;
 
     @GetMapping("/getUser")
-    public @ResponseBody
-    User getUser(@RequestParam String userName) {
+    public @ResponseBody User
+    getUser(@RequestParam String userName) {
         return new UserConverter().convertToApi(userServices.getUser(userName));
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody
-    User addNewUser (@RequestParam String userName, @RequestParam String email) {
+    public @ResponseBody User
+    addNewUser (@RequestParam String userName,
+                @RequestParam String email) {
         return new UserConverter().convertToApi(userServices.addNewUser(userName, userName, email));
     }
 
     @PostMapping(path="/changePassword")
-    public @ResponseBody
-    void changePassword (@RequestParam String userName, @RequestParam String oldPassword, @RequestParam String newPassword) throws Exception {
+    public @ResponseBody void
+    changePassword (@RequestParam String userName,
+                    @RequestParam String oldPassword,
+                    @RequestParam String newPassword) {
         userServices.changePassword(userName, oldPassword, newPassword);
     }
 }

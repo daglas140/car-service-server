@@ -1,11 +1,13 @@
 package com.gawlas.CarServiceServer.entities;
 
+import com.gawlas.CarServiceServer.entities.base.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

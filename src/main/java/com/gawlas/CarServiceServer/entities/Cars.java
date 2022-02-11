@@ -1,10 +1,12 @@
 package com.gawlas.CarServiceServer.entities;
 
+import com.gawlas.CarServiceServer.entities.base.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cars")
-public class Cars {
+public class Cars extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -24,6 +26,13 @@ public class Cars {
     private String engineType;
     @Column(name = "engine_capacity")
     private String engineCapacity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
+
+    public Cars() {
+    }
 
     public Integer getId() {
         return id;
@@ -95,5 +104,13 @@ public class Cars {
 
     public void setEngineCapacity(String engineCapacity) {
         this.engineCapacity = engineCapacity;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

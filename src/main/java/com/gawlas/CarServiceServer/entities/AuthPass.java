@@ -1,10 +1,12 @@
 package com.gawlas.CarServiceServer.entities;
 
+import com.gawlas.CarServiceServer.entities.base.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "auth_pass")
-public class AuthPass {
+public class AuthPass extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
