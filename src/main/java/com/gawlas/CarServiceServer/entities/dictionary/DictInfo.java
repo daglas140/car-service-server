@@ -10,22 +10,27 @@ public class DictInfo extends BaseEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @Column(name = "dict_key")
     private String dictKey;
     @Column(name = "dict_name")
     private String dictName;
+    /**
+        Describe type of dictionary USER or SYSTEM
+     */
+    @Column(name = "dict_type", length = 5)
+    private String dictType;
     @Column(name = "dict_description")
     private String dictDescription;
 
     public DictInfo() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,6 +48,14 @@ public class DictInfo extends BaseEntity {
 
     public void setDictName(String dictName) {
         this.dictName = dictName;
+    }
+
+    public String getDictType() {
+        return dictType;
+    }
+
+    public void setDictType(String dictType) {
+        this.dictType = dictType;
     }
 
     public String getDictDescription() {

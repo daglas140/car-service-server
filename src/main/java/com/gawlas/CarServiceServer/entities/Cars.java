@@ -9,16 +9,16 @@ import javax.persistence.*;
 public class Cars extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @Column(name = "brand")
     private String brand;
     @Column(name = "model")
     private String model;
     @Column(name = "prod_year")
     private Integer productionYear;
-    @Column(name = "mileage")
+    @Column(name = "mileage", length = 10)
     private Integer mileage;
-    @Column(name = "vin")
+    @Column(name = "vin", length = 15)
     private String vinNumber;
     @Column(name = "engine_no")
     private String engineNumber;
@@ -31,14 +31,18 @@ public class Cars extends BaseEntity {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "history_id", referencedColumnName="id", nullable = false)
+    private ServiceHistory serviceHistory;
+
     public Cars() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -112,5 +116,13 @@ public class Cars extends BaseEntity {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public ServiceHistory getServiceHistory() {
+        return serviceHistory;
+    }
+
+    public void setServiceHistory(ServiceHistory serviceHistory) {
+        this.serviceHistory = serviceHistory;
     }
 }

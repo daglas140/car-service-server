@@ -5,7 +5,7 @@ public class DictItem {
     private String code;
     private String name;
 
-    public DictItem() {
+    private DictItem() {
     }
 
     private DictItem(Builder builder) {
@@ -14,7 +14,7 @@ public class DictItem {
     }
 
 
-    public class Builder {
+    public static final class Builder {
         private String code;
         private String name;
         private String dictKey;
@@ -40,6 +40,12 @@ public class DictItem {
         }
 
         public DictItem build() {
+            if (code.isEmpty()) {
+                throw new IllegalStateException("Code cannot be empty");
+            }
+            if (name.isEmpty()) {
+                throw new IllegalStateException("Name cannot be empty");
+            }
             return new DictItem(this);
         }
     }

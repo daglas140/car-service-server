@@ -11,7 +11,7 @@ public class DictItem extends BaseEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @NotNull
     @Column(name = "code")
     private String code;
@@ -26,11 +26,11 @@ public class DictItem extends BaseEntity {
     public DictItem() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
