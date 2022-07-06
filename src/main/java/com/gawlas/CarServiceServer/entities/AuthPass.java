@@ -3,6 +3,7 @@ package com.gawlas.CarServiceServer.entities;
 import com.gawlas.CarServiceServer.entities.base.BaseEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "auth_pass")
@@ -18,10 +19,13 @@ public class AuthPass extends BaseEntity {
     private User user;
 
     public AuthPass() {
+
     }
 
     public AuthPass(String password) {
         this.password = password;
+        setCreatedAt(new Date());
+        setUpdatedAt(new Date());
     }
 
     public Long getId() {

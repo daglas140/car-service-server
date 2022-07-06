@@ -18,18 +18,18 @@ public class User extends BaseEntity {
     private String userName;
     @Column(name = "email")
     private String email;
-    @Column(name = "created_date")
-    private Date createdDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pers_Id", referencedColumnName = "id")
     private PersonalInfo personalInfo;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "auth_id", referencedColumnName = "id")
     private AuthPass authPass;
 
     public User() {
+        setCreatedAt(new Date());
+        setUpdatedAt(new Date());
     }
 
     public Long getId() {
@@ -62,14 +62,6 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public AuthPass getAuthPass() {

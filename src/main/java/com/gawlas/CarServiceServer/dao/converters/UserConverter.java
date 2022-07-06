@@ -1,5 +1,6 @@
 package com.gawlas.CarServiceServer.dao.converters;
 
+import com.gawlas.CarServiceServer.dao.apiModel.PersonalInfo;
 import com.gawlas.CarServiceServer.entities.User;
 import org.modelmapper.ModelMapper;
 
@@ -15,6 +16,10 @@ public class UserConverter {
     }
 
     public com.gawlas.CarServiceServer.dao.apiModel.User convertToApi(User src) {
-        return modelMapper.map(src, com.gawlas.CarServiceServer.dao.apiModel.User.class);
+        com.gawlas.CarServiceServer.dao.apiModel.User user = modelMapper.map(src, com.gawlas.CarServiceServer.dao.apiModel.User.class);
+        if (src.getPersonalInfo() != null) {
+            user.setPersonalData(modelMapper.map(src.getPersonalInfo(), PersonalInfo.class));
+        }
+        return user;
     }
 }

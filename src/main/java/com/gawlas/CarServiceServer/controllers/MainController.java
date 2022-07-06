@@ -6,11 +6,14 @@ import com.gawlas.CarServiceServer.entities.AuthRequest;
 import com.gawlas.CarServiceServer.security.JwtUtils;
 import com.gawlas.CarServiceServer.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class MainController {
 
@@ -29,7 +32,7 @@ public class MainController {
     }
 
     @PostMapping("/auth")
-    public String authenticate(@RequestBody AuthRequest authRequest) throws Exception {
+    public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
@@ -37,7 +40,7 @@ public class MainController {
         } catch (Exception ex) {
             throw new Exception("Niepoprawny użytkownik lub hasło", ex);
         }
-        return jwtUtils.generateToken(authRequest.getUserName());
+        return ResponseEntity.ok(jwtUtils.generateToken(authRequest.getUserName()));
     }
 
     @PostMapping(path="/register")

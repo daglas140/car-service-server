@@ -1,5 +1,10 @@
 package com.gawlas.CarServiceServer.entities;
 
+/**
+ *   Basic class to store credencial data
+ *   @author S.Gawlas
+ *   @version 1.0.0
+ **/
 public class AuthRequest {
     private String userName;
     private String password;
